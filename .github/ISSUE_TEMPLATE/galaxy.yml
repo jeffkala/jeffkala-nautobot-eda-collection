@@ -1,0 +1,31 @@
+---
+namespace: "jeffkala"
+name: "nautobot-eda"
+version: "0.1.0"
+readme: "README.md"
+description: "EDA source plugin for Nautobot Changelogs"
+authors:
+    - "Jeff Kala <info@networktocode.com>"
+
+dependencies:
+tags:
+    - "ansible"
+    - "ntc"
+    - "collection"
+repository: "https://github.com/jeffkala/jeffkala-nautobot-eda-collection"
+documentation: "https://github.com/jeffkala/jeffkala-nautobot-eda-collection"
+homepage: "https://github.com/jeffkala/jeffkala-nautobot-eda-collection"
+issues: "https://github.com/jeffkala/jeffkala-nautobot-eda-collection"
+build_ignore:
+    - "molecule"
+    - "releases"
+    - "Makefile"
+    - "Dockerfile"
+    - "*tƒravis*"
+    - "*.sh"
+    - "*lint*"
+    - ".gitignore"
+    - "*.lock"
+    - "*.toml"
+    - "*.ini"
+    - ".vscode"
