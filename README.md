@@ -7,24 +7,22 @@ EDA source plugin for Nautobot Changelogs
 - Ansible >= 2.9
 
 
-**Collections:**
-
-
-
-
 ## Examples
 
 ```yaml
 ---
-- name: Example usage of the collection
-  hosts: all
-
-  collections:
-    - jeffkala.nautobot-eda
-
-  tasks:
-    - import_role:
-        name: nautobot-eda
+- name: Watch for new changelog entries
+  hosts: localhost
+  sources:
+    - jeffkala.nautobot_eda.nautobot_changelog:
+        instance: https://demo.nautobot.com)
+        token: aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        interval: 1
+  rules:
+    - name: New changelog created
+      condition: event.id is defined
+      action:
+        debug:
 ```
 
 ---
