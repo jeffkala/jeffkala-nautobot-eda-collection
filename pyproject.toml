@@ -39,6 +39,7 @@ ansible = "^2.9.12"
 Jinja2 = "^2.11.2"
 # NOTE: There is a bug in Markdown v3.3.5 that crashes Poetry
 Markdown = "3.3.4"
+aiohttp = "^3.8.4"
 
 [tool.poetry.dev-dependencies]
 ansible-lint = "*"
