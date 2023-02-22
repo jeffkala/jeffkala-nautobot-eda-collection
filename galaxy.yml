@@ -1,6 +1,6 @@
 ---
 namespace: "jeffkala"
-name: "nautobot-eda"
+name: "nautobot_eda"
 version: "0.1.0"
 readme: "README.md"
 description: "EDA source plugin for Nautobot Changelogs"
