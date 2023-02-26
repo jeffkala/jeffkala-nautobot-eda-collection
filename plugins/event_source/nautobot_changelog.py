@@ -1,5 +1,5 @@
 """
-nautobot_changelog.py
+nautobot_changelog.py.
 
 event-driven-ansible source plugin for Nautobot Changelog via /extras/object-changes/
 
@@ -35,11 +35,11 @@ from typing import Any, Dict
 import aiohttp
 
 
-# Entrypoint from ansible-rulebook
 async def main(queue: asyncio.Queue, args: Dict[str, Any]):
-    instance = args.get("instance")
-    token = args.get("token")
-    query = args.get("query", "")  # E.G. ?time__gt=today
+    """Entrypoint from ansible-rulebook."""
+    instance = args.get("instance")  # pylint:disable=W0621
+    token = args.get("token")  # pylint:disable=W0621
+    query = args.get("query", "")
     interval = int(args.get("interval", 5))
 
     start_time = time.time()
@@ -76,10 +76,13 @@ if __name__ == "__main__":
     instance = os.environ.get("NAUTOBOT_HOST")
     token = os.environ.get("NAUTOBOT_TOKEN")
 
-    class MockQueue:
-        print(f"Waiting for events in Nautobot ChangeLog...")
+    class MockQueue:  # pylint:disable=too-few-public-methods
+        """Simple Mock to be able to execute this program without ansible-rulebook."""
+
+        print("Waiting for events in Nautobot ChangeLog...")
 
         async def put(self, event):
+            """Put event into the Mock Queue."""
             print(event)
 
     asyncio.run(main(MockQueue(), {"instance": instance, "token": token}))

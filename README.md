@@ -81,15 +81,69 @@ For testing guidelines see explanation see [Testing](tests/README.md)
 
 It is a standard Ansible collection module. So best practices are found [here](https://docs.ansible.com/ansible/latest/dev_guide/developing_collections.html).
 
-Steps:
+## Poetry
 
-### Build and test collection
+Poetry is used in lieu of the "virtualenv" commands and is leveraged in both environments. The virtual environment will provide all of the Python packages required to manage the development environment such as **Invoke**. See the [Local Development Environment](#local-poetry-development-environment) section to see how to install Netutils if you're going to be developing locally (i.e. not using the Docker container).
 
-After creation/modifications of roles, playbooks, or other modules are done, build and install the collection locally.
+The `pyproject.toml` file outlines all of the relevant dependencies for the project:
 
-```shell
-invoke build
-invoke local-install
+- `tool.poetry.dependencies` - the main list of dependencies.
+- `tool.poetry.dev-dependencies` - development dependencies, to facilitate linting, testing, and documentation building.
+
+The `poetry shell` command is used to create and enable a virtual environment managed by Poetry, so all commands ran going forward are executed within the virtual environment. This is similar to running the `source venv/bin/activate` command with virtualenvs. To install project dependencies in the virtual environment, you should run `poetry install` - this will install **both** project and development dependencies.
+
+For more details about Poetry and its commands please check out its [online documentation](https://python-poetry.org/docs/).
+
+## Full Docker Development Environment
+
+This project is set up with a number of **Invoke** tasks consumed as simple CLI commands to get developing fast. You'll use a few `invoke` commands to get your environment up and running.
+
+## CLI Helper Commands
+
+The project features a CLI helper based on [invoke](http://www.pyinvoke.org/) to help setup the development environment. The commands are listed below in 3 categories:
+- `dev environment`
+- `utility`
+- `testing`
+
+Each command can be executed with `invoke <command>`. Each command also has its own help `invoke <command> --help`
+
+### Local dev environment
+
+```
+  build              Build all docker images.
+  clean              Remove the project specific image.
+  docs               Build and serve docs locally.
+  rebuild            Clean the Docker image and then rebuild without using cache.
+```
+
+### Utility
+
+```
+  cli                Enter the image to perform troubleshooting or dev work.
+  clean-container    Remove stopped containers that source for image `netutils:`
+```
+
+### Testing
+
+```
+  bandit             Run bandit to validate basic static code security analysis.
+  black              Run black to check that Python files adhere to its style standards.
+  coverage           Run the coverage report against pytest.
+  flake8             Run flake8 to check that Python files adhere to its style standards.
+  mypy               Run mypy to validate typing-hints.
+  pylint             Run pylint code analysis.
+  pydocstyle         Run pydocstyle to validate docstring formatting adheres to NTC defined standards.
+  pytest             Run pytest for the specified name and Python version.
+  tests              Run all tests for the specified name and Python version.
+  yamllint           Run yamllint to validate formatting adheres to NTC defined YAML standards.
+```
+
+### Test a Rulebook
+
+Once you build and run the container you can run the rulebook.
+
+```sh
+ansible-rulebook --rulebook playbooks/pb_example1.yml -i inventory/inventory.yml --verbose
 ```
 
 Perform tests locally before commiting and generating a PR for review.
