@@ -1,5 +1,8 @@
 # Ansible Collection: `jeffkala.nautobot-eda`
 
+!!! warn
+  This functionality has been migrated into `nautobot-ansible` collection.
+
 Ansible Event Drive (EDA) source plugin for Nautobot. This source plugin monitors the Nautobot Changelog. As changes are made in Nautobot events will be produced. 
 
 ## Requirements
